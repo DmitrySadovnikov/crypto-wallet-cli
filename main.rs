@@ -101,6 +101,11 @@ impl Token {
     }
 
     fn sell(self, amount: f64, balances: &mut HashMap<Token, f64>) {
+        if self == Token::USDT {
+            println!("❌ Cannot sell USDT directly.");
+            return;
+        }
+
         let token_balance = balances.get(&self).unwrap_or(&0.0);
 
         if token_balance >= &amount {
